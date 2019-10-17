@@ -1,0 +1,6 @@
+npm 
+bootstrap
+animated.css
+fontawesome
+sweeralert
+

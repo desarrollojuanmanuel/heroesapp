@@ -1,0 +1,60 @@
+<h1 class="animated fadeIn faster">Listado de heroes</h1>
+<hr>
+<div class="row animated fadeIn faster">
+    <div class="col text-right">
+        <button type="button" name="" id="" class="btn btn-primary" routerLink="/heroe/nuevo">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Agregar
+        </button>
+    </div>
+</div>
+
+<table *ngIf="!cargando && heroes.length > 0" class="table mt-3 animated fadeIn faster">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Poder</th>
+        <th scope="col">Vivo</th>
+        <th scope="col">Tools</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let heroe of heroes; let i = index">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{heroe.nombre}}</td>
+        <td>{{heroe.poder}}</td>
+        <td>
+            <label *ngIf="heroe.estado" class="badge badge-success">Vivo</label>
+            <label *ngIf="!heroe.estado" class="badge badge-danger">Muerto</label>
+        </td>
+        <td>
+          <button type="button" class="btn btn-info mr-1" [routerLink]="['/heroe', heroe.id]">
+            <i class="fa fa-pencil"></i>
+          </button>
+          <button type="button" class="btn btn-danger" (click)="borrarHeroe( heroe, i )">
+            <i class="fa fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="alert alert-danger text-center mt-5 animated fadeIn slower" role="alert" *ngIf="!cargando && heroes.length === 0">
+        <h4 class="alert-heading">No hay registros</h4>
+        <p class="m-2">
+          <i class="fa fa-cog fa-exclamation fa-3x fa-fw"></i>
+          <span class="sr-only">Loading...</span>
+        </p>
+    </div>
+
+  <div class="alert alert-success text-center mt-5 animated fadeIn slower" role="alert" *ngIf="cargando">
+      <h4 class="alert-heading">Cargando</h4>
+      <p class="m-2">
+        <i class="fa fa-cog fa-spin fa-3x fa-fw"></i>
+        <span class="sr-only">Loading...</span>
+      </p>
+      <p class="mb-0">
+          Un momento por favor
+      </p>
+  </div>
